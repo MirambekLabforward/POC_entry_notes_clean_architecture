@@ -1,0 +1,17 @@
+$nr-border-color: #7c98b6;
+.group {
+  display: block;
+  
+  .group__entry {
+    position: relative;
+    .entry__input {
+      padding-top:2rem;
+      width: 100%;
+    }
+    .entry__button {
+      position: absolute;
+      right: 0;
+      top: 0;
+    }
+  }
+}

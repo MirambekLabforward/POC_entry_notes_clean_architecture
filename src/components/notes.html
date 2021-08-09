@@ -1,0 +1,24 @@
+<template>
+  <require from="./notes.scss"></require>
+  <require from="./editor/editor"></require>
+  <header class="main-header">
+    <div class="user-selection">
+      <h4>Current user:${1+1}</h4>
+      <h3 class="user-selector">User selector:</h3>
+      <div class="signed-user">
+        <button class="user">Admin</button>
+        <button class="user">Manager</button>
+        <button class="user">User</button>
+      </div>
+      
+    </div>
+    <button class="add-button">+ New entry</button>
+  </header>
+  <div class="container">
+    
+    <editor repeat.for="entry of Entries" entry.bind="entry" />
+  </div>
+  <footer class="main-footer">
+  </footer>
+
+</template>

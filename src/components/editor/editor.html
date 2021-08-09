@@ -1,0 +1,19 @@
+<template>
+  <require from="./editor.scss"></require>
+  <div class="group">
+    <h3 class="group__title">${translation.entry}: ${entry.title}</h3>
+    <span class="group__author">${entry.author.fullName}</span>
+    <div class="group__entry">
+      <textarea cols="30" rows="5" class="entry__input" 
+          value.bind="entry.text" 
+          disabled.bind="!isEditing"></textarea>
+      <div class="entry__button">
+        <button class="entry__button--edit" click.delegate="edit()">${translation.edit}</button>
+        <button class="entry__button--save" click.delegate="save()" disabled.bind="!isEditing">${translation.save}</button>
+        <button class="entry__button--delete" click.delegate="delete()" disabled.bind="!canDelete">${translation.delete}</button>
+        <button class="entry__button--delete" click.delegate="cancel()" disabled.bind="!isEditing">${translation.cancel}</button>
+        
+      </div>
+    </div>
+  </div>
+</template>
