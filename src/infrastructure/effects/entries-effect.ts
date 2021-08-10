@@ -36,7 +36,6 @@ export class EntriesEffect {
   async updateEntry(note: EntryState):Promise<void> {
     await this.noteRepository.update(note);
     store.dispatch(ActionName.EntryUpdate, note);
-
   }
   getEntries(): Observable<EntryState[]> {
     return store.state.pipe(pluck("entries"));

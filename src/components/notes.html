@@ -6,9 +6,9 @@
       <h4>Current user: id = ${authManager.CurrentUser.id} name = ${authManager.CurrentUser.userName}</h4>
       <h3 class="user-selector">User selector:</h3>
       <div class="signed-user">
-        <button class="user" click.delegate="change(1)">Admin</button>
-        <button class="user" click.delegate="change(2)">Manager</button>
-        <button class="user" click.delegate="change(3)">User</button>
+        <button class="user" click.delegate="changeUser(role.Admin)">Admin</button>
+        <button class="user" click.delegate="changeUser(role.Manager)">Manager</button>
+        <button class="user" click.delegate="changeUser(role.User)">User</button>
       </div>
     </div>
     <button class="add-button" click.delegate="addNewEntry()">+ New entry</button>

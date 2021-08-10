@@ -46,4 +46,5 @@ export const registerActions = ():void => {
      store.registerAction(ActionName.EntriesUpdate, entriesUpdate);
      store.registerAction(ActionName.CurrentUserUpdate,currentUserUpdate);
      store.registerAction(ActionName.SelectedEntryUpdate,selectedEntryUpdate);
+     store.registerAction(ActionName.EntryDelete,entryDelete)
 }

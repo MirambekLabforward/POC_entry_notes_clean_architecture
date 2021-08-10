@@ -13,17 +13,19 @@ export class Editor {
   @bindable selectedEntry:EntryState;
   translation: any;
 
-  @computedFrom('entry.isEditing','entry','selectedEntry')
+  @computedFrom('entry.isEditing','entry','selectedEntry','authManager.CurrentUser.id')
   get isEditing():boolean{
     return this.entry.isEditing && this.selectedEntry?.id === this.entry?.id;
   }
-  @computedFrom('authManager.CurrentUser.role','selectedEntry.author.userId')
+  @computedFrom('authManager.CurrentUser.id','selectedEntry.author.userId')
   get canEdit():boolean{
-    return this.authManager.CurrentUser?.role === Role.Admin || this.selectedEntry?.author?.userId === this.entry?.id;
+    console.log(this.selectedEntry?.author?.userId )
+    console.log(this.entry?.id);
+    return this.authManager.CurrentUser?.role === Role.Admin || this.entry?.author?.userId === this.authManager.CurrentUser?.id;
   }
-  @computedFrom('authManager.CurrentUser.role','selectedEntry.author.userId')
+  @computedFrom('authManager.CurrentUser.id','selectedEntry.author.userId')
   get canDelete():boolean{
-    return this.authManager.CurrentUser?.role == Role.Admin || this.selectedEntry?.author?.userId === this.entry?.id;
+    return this.authManager.CurrentUser?.role == Role.Admin || this.entry?.author?.userId === this.authManager.CurrentUser?.id;
   }
   constructor(private entryManager:EntryManager,private authManager:AuthManager) {
     this.translation = {
@@ -35,6 +37,7 @@ export class Editor {
     };
   }
   public save(): void {
+    this.entry.isEditing = false;
     this.entryManager.update(this.entry);
   }
   public edit():void{

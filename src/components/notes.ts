@@ -7,7 +7,7 @@ import { usersDataMock } from 'infrastructure/api-services/entries-data-mock';
 
 @autoinject
 export class Notes {
-
+  role = Role;
   translation: {
     word: string;
     frequency: string;
@@ -21,7 +21,7 @@ export class Notes {
     this.entryManager.updateSelectedEntry(entry);
   }
 
-  change(role:Role ):void{
+  changeUser(role:Role ):void{
     this.authManager.updateUser(usersDataMock.find(f=>f.role === role));
   }
 
