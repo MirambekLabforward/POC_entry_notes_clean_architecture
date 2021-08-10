@@ -1,7 +1,7 @@
-import { EntryState } from "shared/store/state-items/entryState";
+import { EntryState } from "shared/store/state-model/entry-state";
 import { EntryService } from "infrastructure/api-services/entry-service";
 import { IEntryService } from "infrastructure/api-services/i-entry-service";
-import { IEntryRepository } from "./ientry-repository";
+import { IEntryRepository } from "./i-entry-repository";
 
 export class EntryRepository implements IEntryRepository{
   private entryService:IEntryService;

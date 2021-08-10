@@ -1,4 +1,4 @@
-import { EntryState } from "shared/store/state-items/entryState";
+import { EntryState } from "shared/store/state-model/entry-state";
 
 export interface IEntryRepository{
     getEntries(): Promise<EntryState[]>;

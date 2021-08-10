@@ -1,51 +1,72 @@
-import { ActionName } from "domain/types/action-name";
-import { EntryState } from "shared/store/state-items/entryState";
-import { IEntryRepository } from "infrastructure/repository/ientry-repository";
+import { AuthManager } from './auth-manager';
+import { EntriesEffect } from './../infrastructure/effects/entries-effect';
+import { EntryState } from "shared/store/state-model/entry-state";
 import { Observable } from "rxjs";
-import { EntryRepository } from "infrastructure/repository/entry-repository";
-import { IEntriesState } from "infrastructure/store/i-entries-state";
-import { EntriesState } from "infrastructure/store/entries-state";
+
 
 export class EntryManager {
-  public Entries: Observable<EntryState[]>;
-  private noteRepository: IEntryRepository;
-  private entriesStore: IEntriesState;
+  public EntriesObservable: Observable<EntryState[]>;
+  public selectedEntryObservable: Observable<EntryState>;
+  private entriesEffect: EntriesEffect;
+  Entries: EntryState[];
+  SelectedEntry:EntryState;
+  private entriesSubscription: any;
+  private selectedEntrySubscription: any;
+  private authorizationManager: AuthManager;
+  
   /**
    * initialize repositories
    *
-   */
+  */
 
   constructor() {
-    this.noteRepository = new EntryRepository();
-    this.entriesStore = new EntriesState();
+    this.entriesEffect = new EntriesEffect();
+    this.authorizationManager = new AuthManager();
     this.initialize();
   }
+
   async initialize():Promise<void> {
-    this.Entries = this.entriesStore.getEntries();
-    this.entriesStore.updateEntries(await this.getEntries());
+    this.EntriesObservable = this.entriesEffect.getEntries();
+    this.selectedEntryObservable = this.entriesEffect.getSelectedEntry();
+    this.attached();
   }
-  async getEntries():Promise<EntryState[]>{
-    return await this.noteRepository.getEntries();
+  attached():void {
+    this.entriesSubscription = this.EntriesObservable.subscribe(arr => {
+      this.Entries = arr;
+    });
+    this.selectedEntrySubscription = this.selectedEntryObservable.subscribe(entry => {
+      this.SelectedEntry = entry;
+    });
+  }
+  detached():void {
+    this.entriesSubscription.unsubscribe();
+    this.selectedEntrySubscription.unsubscribe();
+  }
+  updateSelectedEntry(entry: EntryState):void {
+    this.entriesEffect.updateSelectedEntry(entry);
+  }
+  async getEntries():Promise<Observable<EntryState[]>>{
+    return this.entriesEffect.getEntries()
   }
   async update(note: EntryState): Promise<void> {
     try {
-      await this.noteRepository.update(note);
-      this.entriesStore.updateEntry(note);
+      await this.entriesEffect.updateEntry(note);
     } catch (e) {
       console.log(e);
     }
   }
 
-  async addNewEntry(): Promise<void> {
+  async addNewEntry(): Promise<EntryState> {
     try {
-      const entry: EntryState = { id: -1, text: "",title:"",author:{userId:1,fullName:"Anonym"} };
-      entry.id = await this.noteRepository.add(entry);
-      this.entriesStore.addEntry(entry);
+      const user = this.authorizationManager.CurrentUser ?? {id:3,userName:'Anonym'}
+      const entry: EntryState = { id: -1, text: "",title:"",author:{userId: user.id,fullName:user.userName} };
+      this.entriesEffect.addEntry(entry);
+      return entry;
     } catch (e) {
       console.log(e);
     }
   }
   delete(entry:EntryState):void {
-    this.entriesStore.deleteEntry(entry);
+    this.entriesEffect.deleteEntry(entry);
   }
 }

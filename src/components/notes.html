@@ -3,20 +3,19 @@
   <require from="./editor/editor"></require>
   <header class="main-header">
     <div class="user-selection">
-      <h4>Current user:${1+1}</h4>
+      <h4>Current user: id = ${authManager.CurrentUser.id} name = ${authManager.CurrentUser.userName}</h4>
       <h3 class="user-selector">User selector:</h3>
       <div class="signed-user">
-        <button class="user">Admin</button>
-        <button class="user">Manager</button>
-        <button class="user">User</button>
+        <button class="user" click.delegate="change(1)">Admin</button>
+        <button class="user" click.delegate="change(2)">Manager</button>
+        <button class="user" click.delegate="change(3)">User</button>
       </div>
-      
     </div>
-    <button class="add-button">+ New entry</button>
+    <button class="add-button" click.delegate="addNewEntry()">+ New entry</button>
   </header>
   <div class="container">
     
-    <editor repeat.for="entry of Entries" entry.bind="entry" />
+    <editor repeat.for="entry of entryManager.Entries" entry.bind="entry" selected-entry.bind="entryManager.SelectedEntry"/>
   </div>
   <footer class="main-footer">
   </footer>

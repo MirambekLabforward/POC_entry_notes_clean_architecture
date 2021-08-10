@@ -1,4 +1,5 @@
-import { EntryState } from "shared/store/state-items/entryState";
+import * as M from "minimatch";
+import { EntryState } from "shared/store/state-model/entry-state";
 import { entryDataMock } from "./entries-data-mock";
 import { IEntryService } from "./i-entry-service";
 
@@ -16,6 +17,6 @@ export class EntryService implements IEntryService {
     throw new Error("Method not implemented.");
   }
   getAll(): Promise<EntryState[]> {
-    return Promise.resolve(entryDataMock);
+    return Promise.resolve(entryDataMock.map(m=>m));
   }
 }

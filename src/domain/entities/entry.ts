@@ -1,4 +1,4 @@
-import { Author } from "../../../domain/entities/author";
+import { Author } from "./author";
 
 export interface Entry {
     id:number;

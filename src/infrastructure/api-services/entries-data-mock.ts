@@ -16,3 +16,21 @@ export const entryDataMock = [
     author:{ userId:3,  fullName: "Author 3"}
   }
 ];
+
+export const usersDataMock = [
+  {
+      id:1,
+      userName:'Admin 1',
+      role:1
+  },
+  {
+    id:2,
+    userName:'Manager 1',
+    role:2
+  },
+  {
+    id:3,
+    userName:'User 1',
+    role:3
+  },
+];
