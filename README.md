@@ -4,7 +4,7 @@ This demos is to apply clean architecture principles to the frontend using spa f
 The project is divided into five folders. Components are UI views. It only depends on folder core's sandbox/facad classes. UI is bound to core sandbox classes' property and call action to reflect api/store changes.  The core folder depends on infrastructure effect classes where every effect calls api and updates store. Store state updates are published to core's sandbox classes' property. 
 ##
 The following is graphical depiction:
-[img](docs/img/data-flow.png)
+![Alt text](docs/img/data-flow.png)
 
 ##
 graph TD
