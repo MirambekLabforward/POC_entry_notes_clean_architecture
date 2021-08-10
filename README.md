@@ -1,7 +1,7 @@
 ##
-This demo is to apply clean architecture principles to the frontend using spa framework aurelia and store aurelia store.
+This demo is to apply clean architecture principles to the frontend using spa framework aurelia and aurelia store.
 
-The project is divided into five folders. Components are UI views. It only depends on folder core's sandbox/facad classes. UI is bound to core sandbox classes' property and call action to reflect api/store changes.  The core folder depends on infrastructure effect classes where every effect calls api and updates store. Store state updates are published to core's sandbox classes' property. 
+The project is divided into five folders. Components are UI views. It depends on folder core's sandbox/facade classes' property and calls action to reflect api/store changes.  The core folder depends on infrastructure effect classes where every effect calls api and updates store. Store state changes are published to core's sandbox classes' property. 
 ##
 The following is graphical depiction:
 ![Alt text](docs/img/data-flow.png)
