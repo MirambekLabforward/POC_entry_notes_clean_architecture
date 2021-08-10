@@ -7,18 +7,12 @@ The following is graphical depiction:
 ![Alt text](docs/img/data-flow.png)
 
 ##
-graph TD
-    A[components: Entry] -->|request add entry| B(core: Entry-Manager 'Sandbox')
-    ##
-    ##
-    B --> |add entry|C[infrastructure:EntryEffect]
-    ##
-    C --> |endpoint call|D[infrastructure:API]
-    ##
-    D --> |update|E[shared:Store]
-    ##
-    E --> |updated state|B
-    ##
+graph TD<br />
+    A[components: Entry] -->|request add entry| B(core: Entry-Manager 'Sandbox')<br />
+    B --> |add entry|C[infrastructure:EntryEffect]<br />
+    C --> |endpoint call|D[infrastructure:API]<br />
+    D --> |update|E[shared:Store]<br />
+    E --> |updated state|B<br />
     B --> |update UI|A
 # `lab-note-analysis`
 ## Run dev app
