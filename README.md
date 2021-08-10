@@ -8,12 +8,18 @@ The following is graphical depiction:
 
 ##
 graph TD
-    A[components: Entry] -->|request add entry| B(core: Entry-Manager 'Sandbox')##
-    ##B --> |add entry|C[infrastructure:EntryEffect]
-    ##C --> |endpoint call|D[infrastructure:API]
-    ##D --> |update|E[shared:Store]
-    ##E --> |updated state|B
-    ##B --> |update UI|A
+    A[components: Entry] -->|request add entry| B(core: Entry-Manager 'Sandbox')
+    ##
+    ##
+    B --> |add entry|C[infrastructure:EntryEffect]
+    ##
+    C --> |endpoint call|D[infrastructure:API]
+    ##
+    D --> |update|E[shared:Store]
+    ##
+    E --> |updated state|B
+    ##
+    B --> |update UI|A
 # `lab-note-analysis`
 ## Run dev app
 Run  `npm i`
