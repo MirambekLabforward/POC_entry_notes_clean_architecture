@@ -20,13 +20,14 @@ export class EntriesEffect {
     this.updateEntries(await this.noteRepository.getEntries());
   }
   updateSelectedEntry(entry: EntryState):void {
-    console.log(entry)
     store.dispatch(ActionName.SelectedEntryUpdate, entry);
   }
   getSelectedEntry(): Observable<EntryState> {
+    // Repository or Service backend API should be called
     return store.state.pipe(pluck("selectedEntry"));
   }
   deleteEntry(entry: EntryState):void {
+    /// Repository or Service backend API should be called
     store.dispatch(ActionName.EntryDelete, entry);
   }
   async addEntry(entry: EntryState):Promise<void> {
@@ -41,6 +42,7 @@ export class EntriesEffect {
     return store.state.pipe(pluck("entries"));
   }
   updateEntries(entries:EntryState[]):void{
+    // Repository or Service backend API should be called
     store.dispatch(ActionName.EntriesUpdate, entries);
   }
 }

@@ -10,7 +10,6 @@ export class EntryRepository implements IEntryRepository{
   }
   private async setup():Promise<void>{
      this.entryService = new EntryService();
-     return Promise.resolve();
   }
    constructor(){
      this.setup();

@@ -17,6 +17,6 @@ export class EntryService implements IEntryService {
     throw new Error("Method not implemented.");
   }
   getAll(): Promise<EntryState[]> {
-    return Promise.resolve(entryDataMock.map(m=>m));
+    return Promise.resolve(entryDataMock.map((m) => m));
   }
 }
